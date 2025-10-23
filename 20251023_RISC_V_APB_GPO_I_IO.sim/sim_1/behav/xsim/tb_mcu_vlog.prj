@@ -1,0 +1,17 @@
+# compile verilog/system verilog design source files
+sv xil_defaultlib  \
+"../../../../20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/new/APB_GPO.sv" \
+"../../../../20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/imports/CODE/APB_Manager.sv" \
+"../../../../20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/imports/CODE/CPU_RV32I.sv" \
+"../../../../20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/imports/CODE/ControlUnit.sv" \
+"../../../../20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/imports/CODE/DataPath.sv" \
+"../../../../20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/imports/CODE/MCU.sv" \
+"../../../../20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/imports/CODE/RAM.sv" \
+"../../../../20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/imports/CODE/ROM.sv" \
+"../../../../20251023_RISC_V_APB_GPO_I_IO.srcs/sim_1/new/tb_mcu.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

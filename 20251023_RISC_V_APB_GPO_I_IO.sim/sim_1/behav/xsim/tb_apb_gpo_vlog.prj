@@ -1,0 +1,10 @@
+# compile verilog/system verilog design source files
+sv xil_defaultlib  \
+"../../../../20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/new/APB_GPO.sv" \
+"../../../../20251023_RISC_V_APB_GPO_I_IO.srcs/sim_1/new/tb_apb_gpo.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
