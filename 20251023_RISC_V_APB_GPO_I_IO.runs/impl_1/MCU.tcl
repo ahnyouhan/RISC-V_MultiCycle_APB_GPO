@@ -115,6 +115,7 @@ proc step_failed { step } {
 OPTRACE "impl_1" END { }
 }
 
+set_msg_config -id {Common 17-41} -limit 10000000
 set_msg_config -id {Synth 8-256} -limit 10000
 set_msg_config -id {Synth 8-638} -limit 10000
 
@@ -126,6 +127,7 @@ set rc [catch {
   create_msg_db init_design.pb
   set_param chipscope.maxJobs 4
   set_param synth.incrementalSynthesisCache D:/work/20251023_RISC_V_APB_GPO_I_IO/.Xil/Vivado-12816-DESKTOP-7CFQ9ND/incrSyn
+  set_param xicom.use_bs_reader 1
 OPTRACE "create in-memory project" START { }
   create_project -in_memory -part xc7a35tcpg236-1
   set_property board_part digilentinc.com:basys3:part0:1.2 [current_project]

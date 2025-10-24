@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date         : Thu Oct 23 16:07:57 2025
+| Date         : Thu Oct 23 18:28:36 2025
 | Host         : DESKTOP-7CFQ9ND running 64-bit major release  (build 9200)
 | Command      : report_utilization -file MCU_utilization_synth.rpt -pb MCU_utilization_synth.pb
 | Design       : MCU
@@ -30,13 +30,13 @@ Table of Contents
 +----------------------------+------+-------+-----------+-------+
 |          Site Type         | Used | Fixed | Available | Util% |
 +----------------------------+------+-------+-----------+-------+
-| Slice LUTs*                |  873 |     0 |     20800 |  4.20 |
-|   LUT as Logic             |  825 |     0 |     20800 |  3.97 |
+| Slice LUTs*                |  894 |     0 |     20800 |  4.30 |
+|   LUT as Logic             |  846 |     0 |     20800 |  4.07 |
 |   LUT as Memory            |   48 |     0 |      9600 |  0.50 |
 |     LUT as Distributed RAM |   48 |     0 |           |       |
 |     LUT as Shift Register  |    0 |     0 |           |       |
-| Slice Registers            |  416 |     0 |     41600 |  1.00 |
-|   Register as Flip Flop    |  416 |     0 |     41600 |  1.00 |
+| Slice Registers            |  421 |     0 |     41600 |  1.01 |
+|   Register as Flip Flop    |  421 |     0 |     41600 |  1.01 |
 |   Register as Latch        |    0 |     0 |     41600 |  0.00 |
 | F7 Muxes                   |    0 |     0 |     16300 |  0.00 |
 | F8 Muxes                   |    0 |     0 |      8150 |  0.00 |
@@ -57,7 +57,7 @@ Table of Contents
 | 0     |            _ |       Reset |            - |
 | 0     |          Yes |           - |            - |
 | 4     |          Yes |           - |          Set |
-| 378   |          Yes |           - |        Reset |
+| 383   |          Yes |           - |        Reset |
 | 0     |          Yes |         Set |            - |
 | 34    |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
@@ -69,10 +69,10 @@ Table of Contents
 +-------------------+------+-------+-----------+-------+
 |     Site Type     | Used | Fixed | Available | Util% |
 +-------------------+------+-------+-----------+-------+
-| Block RAM Tile    |  0.5 |     0 |        50 |  1.00 |
-|   RAMB36/FIFO*    |    0 |     0 |        50 |  0.00 |
-|   RAMB18          |    1 |     0 |       100 |  1.00 |
-|     RAMB18E1 only |    1 |       |           |       |
+| Block RAM Tile    |    1 |     0 |        50 |  2.00 |
+|   RAMB36/FIFO*    |    1 |     0 |        50 |  2.00 |
+|     RAMB36E1 only |    1 |       |           |       |
+|   RAMB18          |    0 |     0 |       100 |  0.00 |
 +-------------------+------+-------+-----------+-------+
 * Note: Each Block RAM Tile only has one FIFO logic available and therefore can accommodate only one FIFO36E1 or one FIFO18E1. However, if a FIFO18E1 occupies a Block RAM Tile, that tile can still accommodate a RAMB18E1
 
@@ -152,21 +152,21 @@ Table of Contents
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| LUT6     |  501 |                 LUT |
-| FDCE     |  378 |        Flop & Latch |
-| LUT4     |  159 |                 LUT |
-| LUT5     |  128 |                 LUT |
-| LUT3     |  111 |                 LUT |
+| LUT6     |  500 |                 LUT |
+| FDCE     |  383 |        Flop & Latch |
+| LUT4     |  186 |                 LUT |
+| LUT5     |  132 |                 LUT |
+| LUT3     |   89 |                 LUT |
 | RAMD32   |   72 |  Distributed Memory |
 | CARRY4   |   50 |          CarryLogic |
 | FDRE     |   34 |        Flop & Latch |
 | RAMS32   |   24 |  Distributed Memory |
-| LUT2     |   17 |                 LUT |
+| LUT2     |   16 |                 LUT |
 | LUT1     |    8 |                 LUT |
 | OBUFT    |    4 |                  IO |
 | FDPE     |    4 |        Flop & Latch |
 | IBUF     |    2 |                  IO |
-| RAMB18E1 |    1 |        Block Memory |
+| RAMB36E1 |    1 |        Block Memory |
 | BUFG     |    1 |               Clock |
 +----------+------+---------------------+
 

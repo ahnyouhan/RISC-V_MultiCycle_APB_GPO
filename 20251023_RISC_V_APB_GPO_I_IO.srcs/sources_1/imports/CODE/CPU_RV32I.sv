@@ -5,7 +5,6 @@ module CPU_RV32I (
     input  logic        reset,
     input  logic [31:0] instrCode,
     output logic [31:0] instrMemAddr,
-    output logic [ 2:0] strb,
     output logic        busWe,
     output logic [31:0] busAddr,
     output logic [31:0] busWData,
@@ -13,17 +12,15 @@ module CPU_RV32I (
     output logic        transfer,
     input  logic        ready
 );
-
+    logic       PCEn;
     logic       regFileWe;
     logic [3:0] aluControl;
     logic       aluSrcMuxSel;
     logic [2:0] RFWDSrcMuxSel;
     logic       branch;
-    logic jal, jalr;
-    logic PCEn;
-    
+    logic       jal;
+    logic       jalr;
 
     ControlUnit U_ControlUnit (.*);
     DataPath U_DataPath (.*);
-
 endmodule

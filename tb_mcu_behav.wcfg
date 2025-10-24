@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_mcu_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="tb_mcu" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="8993971667fs"></ZoomStartTime>
+      <ZoomEndTime time="8994971667fs"></ZoomEndTime>
+      <Cursor1Time time="8994805000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="180"></NameColumnWidth>
+      <ValueColumnWidth column_width="83"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="46" />
+   <wvobject fp_name="/tb_mcu/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/reset" type="logic">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/gpo" type="array">
+      <obj_property name="ElementShortName">gpo[3:0]</obj_property>
+      <obj_property name="ObjectShortName">gpo[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="divider" fp_name="divider17">
+      <obj_property name="label">Manager</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/PCLK" type="logic">
+      <obj_property name="ElementShortName">PCLK</obj_property>
+      <obj_property name="ObjectShortName">PCLK</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/PRESET" type="logic">
+      <obj_property name="ElementShortName">PRESET</obj_property>
+      <obj_property name="ObjectShortName">PRESET</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/PADDR" type="array">
+      <obj_property name="ElementShortName">PADDR[31:0]</obj_property>
+      <obj_property name="ObjectShortName">PADDR[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/PWRITE" type="logic">
+      <obj_property name="ElementShortName">PWRITE</obj_property>
+      <obj_property name="ObjectShortName">PWRITE</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/PENABLE" type="logic">
+      <obj_property name="ElementShortName">PENABLE</obj_property>
+      <obj_property name="ObjectShortName">PENABLE</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/PWDATA" type="array">
+      <obj_property name="ElementShortName">PWDATA[31:0]</obj_property>
+      <obj_property name="ObjectShortName">PWDATA[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/PSEL0" type="logic">
+      <obj_property name="ElementShortName">PSEL0</obj_property>
+      <obj_property name="ObjectShortName">PSEL0</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/PSEL1" type="logic">
+      <obj_property name="ElementShortName">PSEL1</obj_property>
+      <obj_property name="ObjectShortName">PSEL1</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/PSEL2" type="logic">
+      <obj_property name="ElementShortName">PSEL2</obj_property>
+      <obj_property name="ObjectShortName">PSEL2</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/PSEL3" type="logic">
+      <obj_property name="ElementShortName">PSEL3</obj_property>
+      <obj_property name="ObjectShortName">PSEL3</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/PRDATA0" type="array">
+      <obj_property name="ElementShortName">PRDATA0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">PRDATA0[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/PRDATA1" type="array">
+      <obj_property name="ElementShortName">PRDATA1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">PRDATA1[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/PRDATA2" type="array">
+      <obj_property name="ElementShortName">PRDATA2[31:0]</obj_property>
+      <obj_property name="ObjectShortName">PRDATA2[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/PRDATA3" type="array">
+      <obj_property name="ElementShortName">PRDATA3[31:0]</obj_property>
+      <obj_property name="ObjectShortName">PRDATA3[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/PREADY0" type="logic">
+      <obj_property name="ElementShortName">PREADY0</obj_property>
+      <obj_property name="ObjectShortName">PREADY0</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/PREADY1" type="logic">
+      <obj_property name="ElementShortName">PREADY1</obj_property>
+      <obj_property name="ObjectShortName">PREADY1</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/PREADY2" type="logic">
+      <obj_property name="ElementShortName">PREADY2</obj_property>
+      <obj_property name="ObjectShortName">PREADY2</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/PREADY3" type="logic">
+      <obj_property name="ElementShortName">PREADY3</obj_property>
+      <obj_property name="ObjectShortName">PREADY3</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/transfer" type="logic">
+      <obj_property name="ElementShortName">transfer</obj_property>
+      <obj_property name="ObjectShortName">transfer</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/write" type="logic">
+      <obj_property name="ElementShortName">write</obj_property>
+      <obj_property name="ObjectShortName">write</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/addr" type="array">
+      <obj_property name="ElementShortName">addr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">addr[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/wdata" type="array">
+      <obj_property name="ElementShortName">wdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">wdata[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/rdata" type="array">
+      <obj_property name="ElementShortName">rdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">rdata[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/ready" type="logic">
+      <obj_property name="ElementShortName">ready</obj_property>
+      <obj_property name="ObjectShortName">ready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/decoder_en" type="logic">
+      <obj_property name="ElementShortName">decoder_en</obj_property>
+      <obj_property name="ObjectShortName">decoder_en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/mux_sel" type="array">
+      <obj_property name="ElementShortName">mux_sel[1:0]</obj_property>
+      <obj_property name="ObjectShortName">mux_sel[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/temp_write_reg" type="logic">
+      <obj_property name="ElementShortName">temp_write_reg</obj_property>
+      <obj_property name="ObjectShortName">temp_write_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/temp_write_next" type="logic">
+      <obj_property name="ElementShortName">temp_write_next</obj_property>
+      <obj_property name="ObjectShortName">temp_write_next</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/temp_addr_reg" type="array">
+      <obj_property name="ElementShortName">temp_addr_reg[31:0]</obj_property>
+      <obj_property name="ObjectShortName">temp_addr_reg[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/temp_addr_next" type="array">
+      <obj_property name="ElementShortName">temp_addr_next[31:0]</obj_property>
+      <obj_property name="ObjectShortName">temp_addr_next[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/temp_wdata_reg" type="array">
+      <obj_property name="ElementShortName">temp_wdata_reg[31:0]</obj_property>
+      <obj_property name="ObjectShortName">temp_wdata_reg[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/temp_wdata_next" type="array">
+      <obj_property name="ElementShortName">temp_wdata_next[31:0]</obj_property>
+      <obj_property name="ObjectShortName">temp_wdata_next[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/pselx" type="array">
+      <obj_property name="ElementShortName">pselx[3:0]</obj_property>
+      <obj_property name="ObjectShortName">pselx[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/state" type="array">
+      <obj_property name="ElementShortName">state[31:0]</obj_property>
+      <obj_property name="ObjectShortName">state[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_APB_Manager/next_state" type="array">
+      <obj_property name="ElementShortName">next_state[31:0]</obj_property>
+      <obj_property name="ObjectShortName">next_state[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="divider" fp_name="divider53">
+      <obj_property name="label">DataPath</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_RV32I/U_DataPath/busAddr" type="array">
+      <obj_property name="ElementShortName">busAddr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">busAddr[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_RV32I/U_DataPath/busWData" type="array">
+      <obj_property name="ElementShortName">busWData[31:0]</obj_property>
+      <obj_property name="ObjectShortName">busWData[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_RV32I/U_DataPath/busRData" type="array">
+      <obj_property name="ElementShortName">busRData[31:0]</obj_property>
+      <obj_property name="ObjectShortName">busRData[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_RV32I/U_DataPath/instrCode" type="array">
+      <obj_property name="ElementShortName">instrCode[31:0]</obj_property>
+      <obj_property name="ObjectShortName">instrCode[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/U_RV32I/U_ControlUnit/state" type="array">
+      <obj_property name="ElementShortName">state[31:0]</obj_property>
+      <obj_property name="ObjectShortName">state[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_mcu/dut/gpo" type="array">
+      <obj_property name="ElementShortName">gpo[3:0]</obj_property>
+      <obj_property name="ObjectShortName">gpo[3:0]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+</wave_config>

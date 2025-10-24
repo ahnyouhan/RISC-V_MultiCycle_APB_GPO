@@ -4,7 +4,7 @@ module ROM (
     input  logic [31:0] addr,
     output logic [31:0] data
 );
-    logic [31:0] rom[0:2**10-1];
+    logic [31:0] rom[0:2**12-1];
 
     initial begin
         $readmemh("code.mem", rom);

@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date             : Thu Oct 23 16:08:47 2025
+| Date             : Thu Oct 23 18:29:20 2025
 | Host             : DESKTOP-7CFQ9ND running 64-bit major release  (build 9200)
 | Command          : report_power -file MCU_power_routed.rpt -pb MCU_power_summary_routed.pb -rpx MCU_power_routed.rpx
 | Design           : MCU
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.096        |
+| Total On-Chip Power (W)  | 0.098        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.025        |
+| Dynamic (W)              | 0.026        |
 | Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 5.0          |
 | Max Ambient (C)          | 84.5         |
@@ -53,17 +53,17 @@ Table of Contents
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |     0.002 |        3 |       --- |             --- |
-| Slice Logic              |     0.010 |     1506 |       --- |             --- |
-|   LUT as Logic           |     0.009 |      816 |     20800 |            3.92 |
+| Slice Logic              |     0.010 |     1518 |       --- |             --- |
+|   LUT as Logic           |     0.009 |      837 |     20800 |            4.02 |
 |   LUT as Distributed RAM |    <0.001 |       48 |      9600 |            0.50 |
 |   CARRY4                 |    <0.001 |       50 |      8150 |            0.61 |
-|   Register               |    <0.001 |      420 |     41600 |            1.01 |
+|   Register               |    <0.001 |      425 |     41600 |            1.02 |
 |   Others                 |     0.000 |       20 |       --- |             --- |
-| Signals                  |     0.013 |     1220 |       --- |             --- |
-| Block RAM                |    <0.001 |      0.5 |        50 |            1.00 |
+| Signals                  |     0.013 |     1253 |       --- |             --- |
+| Block RAM                |    <0.001 |        1 |        50 |            2.00 |
 | I/O                      |    <0.001 |        6 |       106 |            5.66 |
 | Static Power             |     0.072 |          |           |                 |
-| Total                    |     0.096 |          |           |                 |
+| Total                    |     0.098 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -73,7 +73,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.034 |       0.025 |      0.010 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.036 |       0.026 |      0.010 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.013 |       0.000 |      0.013 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.001 |       0.000 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -142,10 +142,10 @@ Table of Contents
 +-----------------------+-----------+
 | Name                  | Power (W) |
 +-----------------------+-----------+
-| MCU                   |     0.025 |
-|   U_RV32I             |     0.024 |
+| MCU                   |     0.026 |
+|   U_RV32I             |     0.025 |
 |     U_ControlUnit     |     0.006 |
-|     U_DataPath        |     0.018 |
+|     U_DataPath        |     0.019 |
 |       U_DecReg_RFRD1  |     0.010 |
 |       U_DecReg_RFRD2  |     0.001 |
 |       U_DecReg_immExt |     0.001 |

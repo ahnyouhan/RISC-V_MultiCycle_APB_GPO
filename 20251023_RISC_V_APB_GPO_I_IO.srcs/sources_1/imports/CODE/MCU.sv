@@ -1,39 +1,15 @@
 `timescale 1ns / 1ps
 
 module MCU (
-    input logic clk,
-    input logic reset,
-    output logic [3:0] gpo
+    input  logic       clk,
+    input  logic       reset,
+    // External Port
+    output logic [7:0] gpo
 );
-    // global signals
-    logic        PCLK;
-    logic        PRESET;
-    // APB Interface Signals
-    logic [31:0] PADDR;
-    logic        PWRITE;
-    logic        PENABLE;
-    logic [31:0] PWDATA;
-    logic        PSEL0;
-    logic        PSEL1;
-    logic        PSEL2;
-    logic        PSEL3;
-    logic [31:0] PRDATA0;
-    logic [31:0] PRDATA1;
-    logic [31:0] PRDATA2;
-    logic [31:0] PRDATA3;
-    logic        PREADY0;
-    logic        PREADY1;
-    logic        PREADY2;
-    logic        PREADY3;
 
-    logic [31:0] instrCode, instrMemAddr;
-
+    wire         PCLK = clk;
+    wire         PRESET = reset;
     // Internal Interface Signals
-    logic [ 2:0] strb;
-    logic        busWe;
-    logic [31:0] busAddr;
-    logic [31:0] busWData;
-    logic [31:0] busRData;
     logic        transfer;
     logic        ready;
     logic        write;
@@ -41,19 +17,32 @@ module MCU (
     logic [31:0] wdata;
     logic [31:0] rdata;
 
+    logic [31:0] instrCode;
+    logic [31:0] instrMemAddr;
+    logic        busWe;
+    logic [31:0] busAddr;
+    logic [31:0] busWData;
+    logic [31:0] busRData;
+    // APB Interface Signals
+    logic [31:0] PADDR;
+    logic        PWRITE;
+    logic        PENABLE;
+    logic [31:0] PWDATA;
+
     logic        PSEL_RAM;
-    logic [31:0] PRDATA_RAM;
-    logic        PREADY_RAM;
     logic        PSEL_GPO;
+
+    logic [31:0] PRDATA_RAM;
     logic [31:0] PRDATA_GPO;
+
+    logic        PREADY_RAM;
     logic        PREADY_GPO;
 
-    assign PCLK   = clk;
-    assign PRESET = reset;
-    assign write  = busWe;
-    assign addr   = busAddr;
-    assign wdata  = busWData;
+    assign write = busWe;
+    assign addr = busAddr;
+    assign wdata = busWData;
     assign busRData = rdata;
+
 
     ROM U_ROM (
         .addr(instrMemAddr),
@@ -61,13 +50,13 @@ module MCU (
     );
 
     CPU_RV32I U_RV32I (.*);
- 
-    APB_Manager U_APB_Manager (
+
+    APB_Master U_APB_Master (
         .*,
-        .PSEL0(PSEL_RAM),
-        .PSEL1(PSEL_GPO),
-        .PSEL2(),
-        .PSEL3(),
+        .PSEL0  (PSEL_RAM),
+        .PSEL1  (PSEL_GPO),
+        .PSEL2  (PSEL_GPI),
+        .PSEL3  (PSEL_GPIOA),
         .PRDATA0(PRDATA_RAM),
         .PRDATA1(PRDATA_GPO),
         .PRDATA2(),
@@ -85,11 +74,11 @@ module MCU (
         .PREADY(PREADY_RAM)
     );
 
-    APB_GPO U_GPO(
+    GPO_Periph U_GPO_Periph (
         .*,
-        .PSEL(PSEL_GPO),
+        .PSEL  (PSEL_GPO),
         .PRDATA(PRDATA_GPO),
         .PREADY(PREADY_GPO)
-);
+    );
 
 endmodule

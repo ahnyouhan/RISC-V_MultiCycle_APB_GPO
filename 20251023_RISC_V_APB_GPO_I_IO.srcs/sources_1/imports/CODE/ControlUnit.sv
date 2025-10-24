@@ -2,32 +2,25 @@
 `include "defines.sv"
 
 module ControlUnit (
-    // global signals
-    input  logic         clk,
-    input  logic         reset,
-    // ROM side port
-    input  logic  [31:0] instrCode,
-    // data path side port
-    output logic         PCEn,
-    output logic         regFileWe,
-    output logic         aluSrcMuxSel,
-    output logic  [ 3:0] aluControl,
-    output logic  [ 2:0] RFWDSrcMuxSel,
-    output logic         branch,
-    output logic         jal,
-    output logic         jalr,
-    // data memory side port
-    output logic  [ 2:0] strb,
-    output logic         busWe,
-    output logic         transfer,
-    input  logic         ready
+    input  logic        clk,
+    input  logic        reset,
+    input  logic [31:0] instrCode,
+    output logic        PCEn,
+    output logic        regFileWe,
+    output logic [ 3:0] aluControl,
+    output logic        aluSrcMuxSel,
+    output logic        busWe,
+    output logic [ 2:0] RFWDSrcMuxSel,
+    output logic        branch,
+    output logic        jal,
+    output logic        jalr,
+    output logic        transfer,
+    input  logic        ready
 );
-    wire  [6:0] opcode = instrCode[6:0];
-    wire  [3:0] operator = {instrCode[30], instrCode[14:12]};
+    wire  [ 6:0] opcode = instrCode[6:0];
+    wire  [ 3:0] operator = {instrCode[30], instrCode[14:12]};
     logic [10:0] signals;
-
     assign {PCEn, regFileWe, aluSrcMuxSel, busWe, RFWDSrcMuxSel, branch, jal, jalr, transfer} = signals;
-    assign strb = instrCode[14:12];
 
     typedef enum {
         FETCH,
@@ -61,7 +54,6 @@ module ControlUnit (
         case (state)
             FETCH:  next_state = DECODE;
             DECODE: begin
-                next_state = R_EXE;
                 case (opcode)
                     `OP_TYPE_R:  next_state = R_EXE;
                     `OP_TYPE_I:  next_state = I_EXE;
@@ -82,18 +74,18 @@ module ControlUnit (
             J_EXE:  next_state = FETCH;
             JL_EXE: next_state = FETCH;
             S_EXE:  next_state = S_MEM;
-            S_MEM:  if(ready) next_state = FETCH;
+            S_MEM:  if (ready) next_state = FETCH;
             L_EXE:  next_state = L_MEM;
-            L_MEM:  if(ready) next_state = L_WB;
+            L_MEM:  if (ready) next_state = L_WB;
             L_WB:   next_state = FETCH;
         endcase
     end
-
+   
     always_comb begin
         signals = 11'b0;
         aluControl = `ADD;
         case (state)
-            //{PCEn, regFileWe, aluSrcMuxSel, dataWe, RFWDSrcMuxSel(3), branch, jal, jalr, transfer} 
+            //{PCEn, regFileWe, aluSrcMuxSel, busWe, RFWDSrcMuxSel(3), branch, jal, jalr, transfer} = signals;
             FETCH:  signals = 11'b1_0_0_0_000_0_0_0_0;
             DECODE: signals = 11'b0_0_0_0_000_0_0_0_0;
             R_EXE: begin
@@ -118,36 +110,7 @@ module ControlUnit (
             L_EXE:  signals = 11'b0_0_1_0_001_0_0_0_0;
             L_MEM:  signals = 11'b0_0_1_0_001_0_0_0_1;
             L_WB:   signals = 11'b0_1_1_0_001_0_0_0_0;
+            //L_WB:   if (ready) signals = 11'b0_1_1_0_001_0_0_0_0;
         endcase
     end
-
-    /*
-    always_comb begin
-        signals = 9'b0;
-        case (opcode)
-            //{regFileWe, aluSrcMuxSel, dataWe, RFWDSrcMuxSel(3), branch, jal, jalr} 
-            `OP_TYPE_R:  signals = 9'b1_0_0_000_0_0_0;
-            `OP_TYPE_I:  signals = 9'b1_1_0_000_0_0_0;
-            `OP_TYPE_S:  signals = 9'b0_1_1_000_0_0_0;
-            `OP_TYPE_L:  signals = 9'b1_1_0_001_0_0_0;
-            `OP_TYPE_B:  signals = 9'b0_0_0_000_1_0_0;
-            `OP_TYPE_LU: signals = 9'b1_0_0_010_0_0_0;
-            `OP_TYPE_AU: signals = 9'b1_0_0_011_0_0_0;
-            `OP_TYPE_J:  signals = 9'b1_0_0_100_0_1_0;
-            `OP_TYPE_JL: signals = 9'b1_0_0_100_0_1_1;
-        endcase
-    end
-
-    always_comb begin
-        aluControl = `ADD;
-        case (opcode)
-            `OP_TYPE_R: aluControl = operator;
-            `OP_TYPE_B: aluControl = operator;
-            `OP_TYPE_I: begin
-                if (operator == 4'b1101) aluControl = operator;
-                else aluControl = {1'b0, operator[2:0]};
-            end
-        endcase
-    end
-    */
 endmodule

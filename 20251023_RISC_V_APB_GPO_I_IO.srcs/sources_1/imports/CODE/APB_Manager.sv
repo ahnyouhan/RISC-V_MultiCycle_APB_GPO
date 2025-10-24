@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module APB_Manager (
+module APB_Master (
     // global signals
     input  logic        PCLK,
     input  logic        PRESET,
@@ -23,18 +23,17 @@ module APB_Manager (
     input  logic        PREADY3,
     // Internal Interface Signals
     input  logic        transfer,
+    output logic        ready,
     input  logic        write,
     input  logic [31:0] addr,
     input  logic [31:0] wdata,
-    output logic [31:0] rdata,
-    output logic        ready
+    output logic [31:0] rdata
 );
-    logic decoder_en;
-    logic [1:0] mux_sel;
-    logic temp_write_reg, temp_write_next;
-    logic [31:0] temp_addr_reg, temp_addr_next;
-    logic [31:0] temp_wdata_reg, temp_wdata_next;
     logic [3:0] pselx;
+    logic [1:0] mux_sel;
+    logic decoder_en;
+    logic [31:0] temp_addr_reg, temp_addr_next, temp_wdata_reg, temp_wdata_next;
+    logic temp_write_reg, temp_write_next;
 
     assign PSEL0 = pselx[0];
     assign PSEL1 = pselx[1];
@@ -47,29 +46,29 @@ module APB_Manager (
         ACCESS
     } apb_state_e;
 
-    apb_state_e state, next_state;
+    apb_state_e state, state_next;
 
     always_ff @(posedge PCLK, posedge PRESET) begin
         if (PRESET) begin
             state          <= IDLE;
-            temp_write_reg <= 0;
             temp_addr_reg  <= 0;
             temp_wdata_reg <= 0;
+            temp_write_reg <= 0;
         end else begin
-            state          <= next_state;
-            temp_write_reg <= temp_write_next;
+            state          <= state_next;
             temp_addr_reg  <= temp_addr_next;
             temp_wdata_reg <= temp_wdata_next;
+            temp_write_reg <= temp_write_next;
         end
     end
 
     always_comb begin
-        next_state      = state;
-        temp_write_next = temp_write_reg;
-        temp_addr_next  = temp_addr_reg;
-        temp_wdata_next = temp_wdata_reg;
+        state_next      = state;
         decoder_en      = 1'b0;
         PENABLE         = 1'b0;
+        temp_addr_next  = temp_addr_reg;
+        temp_wdata_next = temp_wdata_reg;
+        temp_write_next = temp_write_reg;
         PADDR           = temp_addr_reg;
         PWRITE          = temp_write_reg;
         PWDATA          = temp_wdata_reg;
@@ -77,10 +76,10 @@ module APB_Manager (
             IDLE: begin
                 decoder_en = 1'b0;
                 if (transfer) begin
-                    next_state      = SETUP;
-                    temp_write_next = write;
-                    temp_addr_next  = addr;
+                    state_next = SETUP;
+                    temp_addr_next = addr; // latching
                     temp_wdata_next = wdata;
+                    temp_write_next = write;
                 end
             end
             SETUP: begin
@@ -88,7 +87,7 @@ module APB_Manager (
                 PENABLE    = 1'b0;
                 PADDR      = temp_addr_reg;
                 PWRITE     = temp_write_reg;
-                next_state = ACCESS;
+                state_next = ACCESS;
                 if (temp_write_reg) begin
                     PWDATA = temp_wdata_reg;
                 end
@@ -96,25 +95,21 @@ module APB_Manager (
             ACCESS: begin
                 decoder_en = 1'b1;
                 PENABLE    = 1'b1;
-                if (!transfer & ready) begin
-                    next_state = IDLE;
-                end else if (transfer & ready) begin
-                    next_state = SETUP;
-                end else begin
-                    next_state = ACCESS;
+                if (ready) begin
+                    state_next = IDLE;
                 end
             end
         endcase
     end
 
-    APB_Decoder U_APB_DECODER (
+    APB_Decoder U_APB_Decoder (
         .en     (decoder_en),
         .sel    (temp_addr_reg),
         .y      (pselx),
         .mux_sel(mux_sel)
     );
 
-    APB_Mux U_APB_MUX (
+    APB_Mux U_APB_Mux (
         .sel   (mux_sel),
         .rdata0(PRDATA0),
         .rdata1(PRDATA1),
@@ -140,10 +135,10 @@ module APB_Decoder (
         y = 4'b0000;
         if (en) begin
             casex (sel)
-                32'h1000_0xxx: y = 4'b0001;  // RAM
-                32'h1000_1xxx: y = 4'b0010;  // P1
-                32'h1000_2xxx: y = 4'b0100;  // P2
-                32'h1000_3xxx: y = 4'b1000;  // P3
+                32'h1000_0xxx: y = 4'b0001;
+                32'h1000_1xxx: y = 4'b0010;
+                32'h1000_2xxx: y = 4'b0100;
+                32'h1000_3xxx: y = 4'b1000;
             endcase
         end
     end
@@ -152,10 +147,10 @@ module APB_Decoder (
         mux_sel = 2'dx;
         if (en) begin
             casex (sel)
-                32'h1000_0xxx: mux_sel = 2'd0;  // RAM
-                32'h1000_1xxx: mux_sel = 2'd1;  // P1
-                32'h1000_2xxx: mux_sel = 2'd2;  // P2
-                32'h1000_3xxx: mux_sel = 2'd3;  // P3
+                32'h1000_0xxx: mux_sel = 2'd0;
+                32'h1000_1xxx: mux_sel = 2'd1;
+                32'h1000_2xxx: mux_sel = 2'd2;
+                32'h1000_3xxx: mux_sel = 2'd3;
             endcase
         end
     end
@@ -174,6 +169,7 @@ module APB_Mux (
     output logic [31:0] rdata,
     output logic        ready
 );
+
     always_comb begin
         rdata = 32'b0;
         case (sel)

@@ -5,14 +5,14 @@ module DataPath (
     // global signals
     input  logic        clk,
     input  logic        reset,
-    // ROM side port
+    // instruction memory side port
     input  logic [31:0] instrCode,
     output logic [31:0] instrMemAddr,
     // control unit side port
     input  logic        PCEn,
     input  logic        regFileWe,
-    input  logic        aluSrcMuxSel,
     input  logic [ 3:0] aluControl,
+    input  logic        aluSrcMuxSel,
     input  logic [ 2:0] RFWDSrcMuxSel,
     input  logic        branch,
     input  logic        jal,
@@ -22,22 +22,19 @@ module DataPath (
     output logic [31:0] busWData,
     input  logic [31:0] busRData
 );
-    logic [31:0] RFData1, RFData2, aluResult;
-    logic [31:0] PCOutData, PC_4_AdderResult;
-    logic [31:0] immExt, aluSrcMuxOut;
-    logic [31:0] RFWDSrcMuxOut;
-    logic [31:0] PC_Imm_AdderResult, PCSrcMuxOut;
+
+    logic [31:0] aluResult, ExeReg_aluResult;
+    logic [31:0] RFData1, RFData2, DecReg_RFData1, DecReg_RFData2, ExeReg_RFData2;
+    logic [31:0] PCSrcData, PCOutData, PC_Imm_AdderSrcMuxOut;
+    logic [31:0] aluSrcMuxOut, immExt, DecReg_immExt, RFWDSrcMuxOut;
+    logic [31:0] PC_4_AdderResult, PC_Imm_AdderResult, PCSrcMuxOut, ExeReg_PCSrcMuxOut;
+    logic [31:0] MemAccReg_busRData;
     logic PCSrcMuxSel;
     logic btaken;
-    logic [31:0] ExeReg_PCSrcMuxOut;
-    logic [31:0] PC_Imm_AdderSrcMuxOut;
-    logic [31:0] DecReg_RFData1, DecReg_RFData2, DecReg_immExt;
-    logic [31:0] ExeReg_aluResult, ExeReg_RFData2, MemAccReg_busRData;
 
     assign instrMemAddr = PCOutData;
     assign busAddr = ExeReg_aluResult;
     assign busWData = ExeReg_RFData2;
-    assign PCSrcMuxSel = jal | (btaken & branch);
 
     RegisterFile U_RegFile (
         .clk(clk),
@@ -49,7 +46,6 @@ module DataPath (
         .RD1(RFData1),
         .RD2(RFData2)
     );
-
 
     register U_DecReg_RFRD1 (
         .clk  (clk),
@@ -65,33 +61,18 @@ module DataPath (
         .q    (DecReg_RFData2)
     );
 
-    mux_2x1 U_AluSrcMux (
-        .sel(aluSrcMuxSel),
-        .x0 (DecReg_RFData2),
-        .x1 (DecReg_immExt),
-        .y  (aluSrcMuxOut)
-    );
-
-    alu U_ALU (
-        .aluControl(aluControl),
-        .a         (DecReg_RFData1),
-        .b         (aluSrcMuxOut),
-        .result    (aluResult),
-        .btaken    (btaken)
-    );
-
-    register U_ExeReg_ALU (
-        .clk  (clk),
-        .reset(reset),
-        .d    (aluResult),
-        .q    (ExeReg_aluResult)
-    );
-
     register U_ExeReg_RFRD2 (
         .clk  (clk),
         .reset(reset),
         .d    (DecReg_RFData2),
         .q    (ExeReg_RFData2)
+    );
+
+    mux_2x1 U_AluSrcMux (
+        .sel(aluSrcMuxSel),
+        .x0 (DecReg_RFData2),
+        .x1 (DecReg_immExt),
+        .y  (aluSrcMuxOut)
     );
 
     register U_MemAccReg_ReadData (
@@ -111,22 +92,31 @@ module DataPath (
         .y  (RFWDSrcMuxOut)
     );
 
+    alu U_ALU (
+        .aluControl(aluControl),
+        .a         (DecReg_RFData1),
+        .b         (aluSrcMuxOut),
+        .result    (aluResult),
+        .btaken    (btaken)
+    );
+
+    register U_ExeReg_ALU (
+        .clk  (clk),
+        .reset(reset),
+        .d    (aluResult),
+        .q    (ExeReg_aluResult)
+    );
+
     immExtend U_ImmExtend (
         .instrCode(instrCode),
         .immExt   (immExt)
     );
 
-    register U_DecReg_immExt (
+    register U_DecReg_ImmExtend (
         .clk  (clk),
         .reset(reset),
         .d    (immExt),
         .q    (DecReg_immExt)
-    );
-
-    adder U_PC_4_Adder (
-        .a(32'd4),
-        .b(PCOutData),
-        .y(PC_4_AdderResult)
     );
 
     mux_2x1 U_PC_Imm_AdderSrcMux (
@@ -141,6 +131,14 @@ module DataPath (
         .b(PC_Imm_AdderSrcMuxOut),
         .y(PC_Imm_AdderResult)
     );
+
+    adder U_PC_4_Adder (
+        .a(32'd4),
+        .b(PCOutData),
+        .y(PC_4_AdderResult)
+    );
+
+    assign PCSrcMuxSel = jal | (btaken & branch);
 
     mux_2x1 U_PCSrcMux (
         .sel(PCSrcMuxSel),
@@ -166,33 +164,6 @@ module DataPath (
 
 endmodule
 
-module RegisterFile (
-    input  logic        clk,
-    input  logic        we,
-    input  logic [ 4:0] RA1,
-    input  logic [ 4:0] RA2,
-    input  logic [ 4:0] WA,
-    input  logic [31:0] WD,
-    output logic [31:0] RD1,
-    output logic [31:0] RD2
-);
-    logic [31:0] mem[0:2**5-1];
-
-    /*
-    initial begin
-        for (int i = 0; i < 32; i++) begin
-            mem[i] = i;
-        end
-    end
-*/
-    always_ff @(posedge clk) begin
-        if (we) mem[WA] <= WD;
-    end
-
-    assign RD1 = (RA1 != 0) ? mem[RA1] : 32'b0;
-    assign RD2 = (RA2 != 0) ? mem[RA2] : 32'b0;
-endmodule
-
 module alu (
     input  logic [ 3:0] aluControl,
     input  logic [31:0] a,
@@ -206,9 +177,9 @@ module alu (
         case (aluControl)
             `ADD:  result = a + b;
             `SUB:  result = a - b;
-            `SLL:  result = a << b[4:0];
-            `SRL:  result = a >> b[4:0];
-            `SRA:  result = $signed(a) >>> b[4:0];
+            `SLL:  result = a << b;
+            `SRL:  result = a >> b;
+            `SRA:  result = $signed(a) >>> b;
             `SLT:  result = ($signed(a) < $signed(b)) ? 1 : 0;
             `SLTU: result = (a < b) ? 1 : 0;
             `XOR:  result = a ^ b;
@@ -217,7 +188,7 @@ module alu (
         endcase
     end
 
-    always_comb begin
+    always_comb begin : branch
         btaken = 1'b0;
         case (aluControl[2:0])
             `BEQ:  btaken = (a == b);
@@ -230,6 +201,33 @@ module alu (
     end
 endmodule
 
+module RegisterFile (
+    input  logic        clk,
+    input  logic        we,
+    input  logic [ 4:0] RA1,
+    input  logic [ 4:0] RA2,
+    input  logic [ 4:0] WA,
+    input  logic [31:0] WD,
+    output logic [31:0] RD1,
+    output logic [31:0] RD2
+);
+    logic [31:0] mem[0:2**5-1];
+
+   /* 
+    initial begin  // for simulation test
+        for (int i = 0; i < 32; i++) begin
+            mem[i] = 10 + i;
+        end
+    end
+   */ 
+
+    always_ff @(posedge clk) begin
+        if (we) mem[WA] <= WD;
+    end
+
+    assign RD1 = (RA1 != 0) ? mem[RA1] : 32'b0;
+    assign RD2 = (RA2 != 0) ? mem[RA2] : 32'b0;
+endmodule
 
 module registerEn (
     input  logic        clk,
@@ -311,16 +309,25 @@ module immExtend (
     output logic [31:0] immExt
 );
     wire [6:0] opcode = instrCode[6:0];
-    wire [3:0] operator = {instrCode[30], instrCode[14:12]};
+    wire [2:0] func3 = instrCode[14:12];
 
     always_comb begin
         immExt = 32'bx;
         case (opcode)
-            `OP_TYPE_I: immExt = {{20{instrCode[31]}}, instrCode[31:20]};
+            `OP_TYPE_R: immExt = 32'bx;  // R-Type
             `OP_TYPE_L: immExt = {{20{instrCode[31]}}, instrCode[31:20]};
-            `OP_TYPE_JL: immExt = {{20{instrCode[31]}}, instrCode[31:20]};
             `OP_TYPE_S:
-            immExt = {{20{instrCode[31]}}, instrCode[31:25], instrCode[11:7]};
+            immExt = {
+                {20{instrCode[31]}}, instrCode[31:25], instrCode[11:7]
+            };  // S-Type
+            `OP_TYPE_I: begin
+                case (func3)
+                    3'b001:  immExt = {27'b0, instrCode[24:20]};  // SLLI
+                    3'b101:  immExt = {27'b0, instrCode[24:20]};  // SRLI, SRAI
+                    3'b011:  immExt = {20'b0, instrCode[31:20]};  // SLTIU
+                    default: immExt = {{20{instrCode[31]}}, instrCode[31:20]};
+                endcase
+            end
             `OP_TYPE_B:
             immExt = {
                 {20{instrCode[31]}},
@@ -339,6 +346,7 @@ module immExtend (
                 instrCode[30:21],
                 1'b0
             };
+            `OP_TYPE_JL: immExt = {{20{instrCode[31]}}, instrCode[31:20]};
         endcase
     end
 endmodule

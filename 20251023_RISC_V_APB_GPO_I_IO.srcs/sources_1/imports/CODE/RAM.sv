@@ -22,7 +22,7 @@ module RAM (
     output logic        PREADY
 
 );
-    logic [7:0] mem[0:2**12-1]; // offset range : 0x0000 ~0x0fff
+    logic [31:0] mem[0:2**12-1]; // offset range : 0x0000 ~0x0fff
 
     always_ff @( posedge PCLK ) begin
         PREADY <= 1'b0;
