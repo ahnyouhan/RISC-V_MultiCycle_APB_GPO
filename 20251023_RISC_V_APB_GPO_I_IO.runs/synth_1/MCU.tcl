@@ -101,6 +101,8 @@ read_verilog -library xil_defaultlib -sv {
   D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/defines.sv
   D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/ControlUnit.sv
   D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/DataPath.sv
+  D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/GPI.sv
+  D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/new/GPIO.sv
   D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/GPO.sv
   D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/RAM.sv
   D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/ROM.sv
