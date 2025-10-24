@@ -91,17 +91,20 @@ set_property ip_output_repo d:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
-read_mem D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/imports/CODE/code.mem
+read_mem {
+  D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/code.mem
+  D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/code_org.mem
+}
 read_verilog -library xil_defaultlib -sv {
-  D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/new/APB_GPO.sv
-  D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/imports/CODE/APB_Manager.sv
-  D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/imports/CODE/CPU_RV32I.sv
-  D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/imports/CODE/defines.sv
-  D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/imports/CODE/ControlUnit.sv
-  D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/imports/CODE/DataPath.sv
-  D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/imports/CODE/RAM.sv
-  D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/imports/CODE/ROM.sv
-  D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/imports/CODE/MCU.sv
+  D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/APB_Master.sv
+  D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/CPU_RV32I.sv
+  D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/defines.sv
+  D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/ControlUnit.sv
+  D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/DataPath.sv
+  D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/GPO.sv
+  D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/RAM.sv
+  D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/ROM.sv
+  D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/sources_1/MCU.sv
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
@@ -112,8 +115,8 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/constrs_1/imports/work/Basys-3-Master.xdc
-set_property used_in_implementation false [get_files D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/constrs_1/imports/work/Basys-3-Master.xdc]
+read_xdc D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/constrs_1/imports/20251023_RISC_V_APB_GPO_I_IO.srcs/MY_Basys-3-Master.xdc
+set_property used_in_implementation false [get_files D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/constrs_1/imports/20251023_RISC_V_APB_GPO_I_IO.srcs/MY_Basys-3-Master.xdc]
 
 set_param ips.enableIPCacheLiteLoad 1
 close [open __synthesis_is_running__ w]

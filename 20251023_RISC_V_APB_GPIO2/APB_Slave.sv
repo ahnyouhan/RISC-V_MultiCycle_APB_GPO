@@ -1,15 +1,15 @@
 `timescale 1ns / 1ps
 
 module APB_Slave (
-    //global signals
+    // global signals
     input  logic        PCLK,
     input  logic        PRESET,
-    //APB Interface Signals
+    // APB Interface Signals
     input  logic [ 3:0] PADDR,
     input  logic        PWRITE,
-    input  logic        PSEL,
     input  logic        PENABLE,
     input  logic [31:0] PWDATA,
+    input  logic        PSEL,
     output logic [31:0] PRDATA,
     output logic        PREADY
 );
@@ -23,7 +23,7 @@ module APB_Slave (
             slv_reg3 <= 0;
         end else begin
             PREADY <= 1'b0;
-            if (PSEL & PENABLE) begin
+            if (PSEL && PENABLE) begin
                 PREADY <= 1'b1;
                 if (PWRITE) begin
                     case (PADDR[3:2])
@@ -39,6 +39,7 @@ module APB_Slave (
                         2'd2: PRDATA <= slv_reg2;
                         2'd3: PRDATA <= slv_reg3;
                     endcase
+
                 end
             end
         end

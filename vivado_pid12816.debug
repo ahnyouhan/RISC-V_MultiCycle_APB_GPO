@@ -1,0 +1,80 @@
+#--------------------------------------------------------------------------
+# Xilinx Vivado v2020.2 (64-bit)
+# SW Build: 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build: 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Current time: Thu Oct 23 18:08:00 KST 2025
+# Process ID (PID): 12816
+# User: kccistc
+# OS: Windows 10
+# Project: 20251023_RISC_V_APB_GPO_I_IO
+# Part: Basys3 (xc7a35tcpg236-1)
+#
+# This file is an indication that an internal application error occurred.
+# This information is useful for debugging. Please open a case with Xilinx.
+# Technical Support with this file and a testcase attached.
+#--------------------------------------------------------------------------
+Thu Oct 23 18:08:00 KST 2025
+ui.utils.e: ui.frmwork.cmd.CommandFailedException: Unknown exception occurred ui.frmwork.cmd.CommandFailedException: Unknown exception occurred
+	at ui.views.waveform.waveformi.WVExecutive_getValueDataSize(Native Method)
+	at ui.views.waveform.executive.a.klY(SourceFile:395)
+	at ui.views.waveform.f.w.knM(SourceFile:84)
+	at ui.views.waveform.f.w.Ii(SourceFile:73)
+	at ui.views.waveform.f.m.Ii(SourceFile:154)
+	at ui.views.waveform.m.Ij(SourceFile:261)
+	at ui.views.waveform.m.Ii(SourceFile:116)
+	at ui.views.waveform.w.aH(SourceFile:427)
+	at ui.views.waveform.c.b.j(SourceFile:473)
+	at ui.views.waveform.w.handleTclEvent(SourceFile:696)
+	at ui.frmwork.a.o.c(SourceFile:42)
+	at ui.frmwork.E.i(SourceFile:253)
+	at ui.frmwork.E.fireTclEvent(SourceFile:350)
+	at ui.views.waveform.waveformi.WVExecutive_processModelEvent(Native Method)
+	at ui.views.waveform.executive.a.gb(SourceFile:630)
+	at ui.views.waveform.c.b.ga(SourceFile:565)
+	at ui.views.waveform.c.b.j(SourceFile:480)
+	at ui.views.waveform.w.handleTclEvent(SourceFile:696)
+	at ui.frmwork.a.o.c(SourceFile:42)
+	at ui.frmwork.E.i(SourceFile:253)
+	at ui.frmwork.E.dQ(SourceFile:336)
+	at java.desktop/java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:303)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:770)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:721)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:715)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:85)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:740)
+	at ui.frmwork.a.d.dispatchEvent(SourceFile:92)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
+
+	at ui.utils.d.c.p(SourceFile:918)
+	at ui.utils.d.c.i(SourceFile:278)
+	at ui.utils.q.i(SourceFile:257)
+	at ui.frmwork.E.fireTclEvent(SourceFile:353)
+	at ui.views.waveform.waveformi.WVExecutive_processModelEvent(Native Method)
+	at ui.views.waveform.executive.a.gb(SourceFile:630)
+	at ui.views.waveform.c.b.ga(SourceFile:565)
+	at ui.views.waveform.c.b.j(SourceFile:480)
+	at ui.views.waveform.w.handleTclEvent(SourceFile:696)
+	at ui.frmwork.a.o.c(SourceFile:42)
+	at ui.frmwork.E.i(SourceFile:253)
+	at ui.frmwork.E.dQ(SourceFile:336)
+	at java.desktop/java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:303)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:770)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:721)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:715)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:85)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:740)
+	at ui.frmwork.a.d.dispatchEvent(SourceFile:92)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
+

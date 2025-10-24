@@ -143,7 +143,7 @@ OPTRACE "set parameters" END { }
 OPTRACE "add files" START { }
   add_files -quiet D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.runs/synth_1/MCU.dcp
 OPTRACE "read constraints: implementation" START { }
-  read_xdc D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/constrs_1/imports/work/Basys-3-Master.xdc
+  read_xdc D:/work/20251023_RISC_V_APB_GPO_I_IO/20251023_RISC_V_APB_GPO_I_IO.srcs/constrs_1/imports/20251023_RISC_V_APB_GPO_I_IO.srcs/MY_Basys-3-Master.xdc
 OPTRACE "read constraints: implementation" END { }
 OPTRACE "add files" END { }
 OPTRACE "link_design" START { }

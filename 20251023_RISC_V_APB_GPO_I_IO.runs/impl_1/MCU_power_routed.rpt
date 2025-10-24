@@ -1,7 +1,7 @@
 Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
-| Date             : Thu Oct 23 18:29:20 2025
+| Date             : Fri Oct 24 09:38:43 2025
 | Host             : DESKTOP-7CFQ9ND running 64-bit major release  (build 9200)
 | Command          : report_power -file MCU_power_routed.rpt -pb MCU_power_summary_routed.pb -rpx MCU_power_routed.rpx
 | Design           : MCU
@@ -53,15 +53,15 @@ Table of Contents
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |     0.002 |        3 |       --- |             --- |
-| Slice Logic              |     0.010 |     1518 |       --- |             --- |
-|   LUT as Logic           |     0.009 |      837 |     20800 |            4.02 |
+| Slice Logic              |     0.010 |     1656 |       --- |             --- |
+|   LUT as Logic           |     0.009 |      953 |     20800 |            4.58 |
 |   LUT as Distributed RAM |    <0.001 |       48 |      9600 |            0.50 |
 |   CARRY4                 |    <0.001 |       50 |      8150 |            0.61 |
-|   Register               |    <0.001 |      425 |     41600 |            1.02 |
+|   Register               |    <0.001 |      427 |     41600 |            1.03 |
 |   Others                 |     0.000 |       20 |       --- |             --- |
-| Signals                  |     0.013 |     1253 |       --- |             --- |
+| Signals                  |     0.014 |     1388 |       --- |             --- |
 | Block RAM                |    <0.001 |        1 |        50 |            2.00 |
-| I/O                      |    <0.001 |        6 |       106 |            5.66 |
+| I/O                      |    <0.001 |       10 |       106 |            9.43 |
 | Static Power             |     0.072 |          |           |                 |
 | Total                    |     0.098 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
@@ -139,18 +139,18 @@ Table of Contents
 3.1 By Hierarchy
 ----------------
 
-+-----------------------+-----------+
-| Name                  | Power (W) |
-+-----------------------+-----------+
-| MCU                   |     0.026 |
-|   U_RV32I             |     0.025 |
-|     U_ControlUnit     |     0.006 |
-|     U_DataPath        |     0.019 |
-|       U_DecReg_RFRD1  |     0.010 |
-|       U_DecReg_RFRD2  |     0.001 |
-|       U_DecReg_immExt |     0.001 |
-|       U_PC            |     0.002 |
-|       U_RegFile       |     0.001 |
-+-----------------------+-----------+
++--------------------------+-----------+
+| Name                     | Power (W) |
++--------------------------+-----------+
+| MCU                      |     0.026 |
+|   U_RV32I                |     0.025 |
+|     U_ControlUnit        |     0.007 |
+|     U_DataPath           |     0.018 |
+|       U_DecReg_ImmExtend |     0.001 |
+|       U_DecReg_RFRD1     |     0.009 |
+|       U_DecReg_RFRD2     |     0.002 |
+|       U_PC               |     0.002 |
+|       U_RegFile          |     0.001 |
++--------------------------+-----------+
 
 
